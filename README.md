@@ -16,7 +16,7 @@ Ein Projekt mit dem Ziel einen Staubsaugroboter zu simulieren
   * einstellen von Saugzeiten
 
 
-##optionale Kriterien
+## optionale Kriterien:
 * Raummanager
   * Die Umgebung des Roboters kann über eine UI geändert werden
   * Es können mehrere Räume verwaltet werden
