@@ -18,10 +18,10 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		try {
 			RaumManager manager = new RaumManager();
-			manager.erstelleRaum();
+			manager.erstelleRaum(200);
 			primaryStage.setTitle("Simulation");
-			Scene raum = manager.getRaum();
-			
+			Scene raum = manager.getRaumFX();
+
 			primaryStage.setScene(raum);
 			primaryStage.show();
 		} catch (Exception e){
