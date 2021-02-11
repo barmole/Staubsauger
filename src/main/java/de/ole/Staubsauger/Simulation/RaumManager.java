@@ -30,11 +30,7 @@ public class RaumManager {
         hindernisse.add(wand3);
         hindernisse.add(wand4);
 
-        for (int i = 0; i < anzahlSchmutz; i++) {
-            double randomX = r.nextInt(breite);
-            double randomY = r.nextInt(hoehe);
-            schmutzTeilchen.add(new Schmutz(randomX, randomY));
-        }
+        streueSchmutz(anzahlSchmutz);
 
         ladestation = new Ladestation(breite / 2, 20);
 
@@ -54,4 +50,15 @@ public class RaumManager {
         return ladestation;
     }
 
+    public void loescheSchmutz() {
+        schmutzTeilchen.clear();
+    }
+
+    public void streueSchmutz(int Anzahl){
+        for (int i = 0; i < Anzahl; i++) {
+            double randomX = r.nextInt(breite);
+            double randomY = r.nextInt(hoehe);
+            schmutzTeilchen.add(new Schmutz(randomX, randomY));
+        }
+    }
 }

@@ -18,7 +18,7 @@ import lombok.Data;
 public class Main extends Application {
     RaumManager manager = new RaumManager();
     RaumFX raumFX = new RaumFX();
-    Roboter roboter = new Roboter(200, 40, 0);
+    Roboter roboter = new Roboter(200, 200, 0);
     RobotFX robotFX = new RobotFX();
 
     Stage simulation;
@@ -60,6 +60,8 @@ public class Main extends Application {
 
             Stage einstellungen = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Einstellungen.fxml"));
+            Einstellungen einstellungsController = new Einstellungen(roboter, manager);
+            loader.setController(einstellungsController);
             AnchorPane rootLayout = loader.load();
             einstellungen.setScene(new Scene(rootLayout));
             einstellungen.setTitle("Einstellungen");
@@ -85,11 +87,6 @@ public class Main extends Application {
     Thread thread = new Thread(new Runnable() {
         @Override
         public void run() {
-            try {
-                Thread.sleep(0);
-            } catch (InterruptedException exc) {
-                throw new Error("Unexpected interruption", exc);
-            }
             roboter.setStatus(Status.FAHREN);
             Platform.runLater(() -> berechne());
         }
