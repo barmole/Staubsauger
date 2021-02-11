@@ -1,9 +1,9 @@
-package de.ole.Staubsauger;
+package de.ole.Staubsauger.Simulation;
 
-public class Schmutz {
+public class Ladestation {
     double posX,posY;
 
-    public Schmutz(double posX, double posY) {
+    public Ladestation(double posX, double posY) {
         this.posX = posX;
         this.posY = posY;
     }

@@ -1,4 +1,4 @@
-package de.ole.Staubsauger;
+package de.ole.Staubsauger.Simulation;
 
 public class Simulation {
     private double posX;

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="207.0" prefWidth="189.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.ole.Staubsauger.UI.Einstellungen">
+   <children>
+      <Slider accessibleText="Geschwindigkeitsregler" layoutX="25.0" layoutY="32.0" prefHeight="14.0" prefWidth="113.0" />
+      <Button layoutX="26.0" layoutY="113.0" mnemonicParsing="false" text="neuen Schmutz streuen" />
+      <TextField layoutX="24.0" layoutY="77.0" prefHeight="26.0" prefWidth="141.0" />
+      <Button layoutX="25.0" layoutY="145.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Schmutz entfernen" />
+      <Label layoutX="25.0" layoutY="14.0" prefHeight="18.0" prefWidth="95.0" text="Geschwindigkeit:" />
+      <Label layoutX="147.0" layoutY="30.0" text="1" />
+   </children>
+</AnchorPane>
