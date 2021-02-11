@@ -30,10 +30,13 @@ public class Roboter {
         switch (status) {
             case FAHREN:
                 if (kollision(manager)) {
+                    fahre(-1);
                     zielRotation = r.nextInt(360);
+                    System.out.println(zielRotation);
                     status = Status.DREHEN;
                 } else {
-                    posY++;
+                    ueberpruefeSchmutz(manager);
+                    fahre(1);
                 }
                 break;
 
@@ -44,24 +47,38 @@ public class Roboter {
                     rotation--;
                 }else {
                     status = Status.FAHREN;
+
                 }
                 break;
         }
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    private void fahre(double strecke) {
+        posX += Math.sin(rotation) * strecke;
+        posY += Math.cos(rotation) * strecke;
     }
 
     boolean kollision(RaumManager manager) {
         for (Hinderniss hinderniss : manager.getHindernisse()) {
             if (hinderniss.getPosX() <= posX + 20 &&
-                    hinderniss.getPosX() + hinderniss.getBreite() >= posX &&
+                    hinderniss.getPosX() + hinderniss.getBreite() >= posX -20 &&
                     hinderniss.getPosY() <= posY + 20 &&
-                    hinderniss.getPosY() + hinderniss.getHoehe() >= posY) {
+                    hinderniss.getPosY() + hinderniss.getHoehe() >= posY -20) {
                 return true;
             }
         }
         return false;
+    }
+
+    void ueberpruefeSchmutz(RaumManager manager){
+        manager.getSchmutzTeilchen().removeIf(schmutz ->
+                schmutz.getPosX() <= posX + 20 &&
+                schmutz.getPosX() >= posX -20 &&
+                schmutz.getPosY() <= posY + 20 &&
+                schmutz.getPosY() >= posY -20);
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

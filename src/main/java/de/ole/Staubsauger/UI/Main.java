@@ -18,7 +18,7 @@ import lombok.Data;
 public class Main extends Application {
     RaumManager manager = new RaumManager();
     RaumFX raumFX = new RaumFX();
-    Roboter roboter = new Roboter(200, 30, 0);
+    Roboter roboter = new Roboter(200, 40, 0);
     RobotFX robotFX = new RobotFX();
 
     Stage simulation;

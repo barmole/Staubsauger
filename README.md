@@ -11,7 +11,7 @@ Ein Projekt mit dem Ziel einen Staubsaugroboter zu simulieren
   * [ ] Der Roboter fährt in die neue Richtung weiter
   * [ ] Der Roboter fährt nach einer bestimmten Zeit zum Ausgangspunkt zurück
   * [x] Der Roboter hat ein Gesicht
-  * [ ] Der Roboter saugt beim Fahren kleine Pixel weg
+  * [x] Der Roboter saugt beim Fahren kleine Pixel weg
   * [ ] Der Roboter hat einen Batteriestand, Beutelinhalt, Reparaturstatus
   * [ ] Der Roboter kann laden
 
