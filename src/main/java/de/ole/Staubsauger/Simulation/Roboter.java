@@ -20,4 +20,8 @@ public class Roboter {
         this.posY = posY;
         this.rotation = rotation;
     }
+
+    public void berechne() {
+        posY++;
+    }
 }

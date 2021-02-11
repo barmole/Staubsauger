@@ -1,43 +1,61 @@
 package de.ole.Staubsauger.UI;
 
+import de.ole.Staubsauger.Simulation.Hinderniss;
 import de.ole.Staubsauger.Simulation.RaumManager;
 import de.ole.Staubsauger.Simulation.Roboter;
 import javafx.application.Application;
-import javafx.fxml.FXML;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lombok.Data;
 
 
 @Data
 public class Main extends Application {
+    RaumManager manager = new RaumManager();
+    RaumFX raumFX = new RaumFX();
+    Roboter roboter = new Roboter(200, 30, 0);
+    RobotFX robotFX = new RobotFX();
 
-    @FXML
-    Einstellungen einstellungen;
+    Stage simulation;
+    Scene raumScene;
+    StackPane p;
+
 
     public static void main(String[] args) {
         launch(args);
+        Main main = new Main();
+    }
+
+    private void berechne() {
+        roboter.berechne();
+
+
+
+        p.getChildren().remove(0);
+        p.getChildren().add(new Pane(raumFX.getRaumFX(manager), robotFX.getRobotFX(roboter)));
+
+
+        Platform.runLater(this::berechne);
+
     }
 
 
     @Override
     public void start(Stage simulation) throws Exception {
+        this.simulation = simulation;
         try {
-            RaumManager manager = new RaumManager();
-            RaumFX raumFX = new RaumFX();
-            Roboter roboter = new Roboter(200, 30, 0);
-            RobotFX robotFX = new RobotFX();
-
             manager.erstelleRaum(400, 400, 2000);
-            Pane p = new Pane(raumFX.getRaumFX(manager), robotFX.getRobotFX(roboter));
-            Scene raum = new Scene(p);
+            p = new StackPane(raumFX.getRaumFX(manager), robotFX.getRobotFX(roboter));
+            raumScene = new Scene(p);
 
 
             simulation.setTitle("Simulation");
-            simulation.setScene(raum);
+            simulation.setScene(raumScene);
             simulation.setX(0);
             simulation.setY(0);
             simulation.show();
@@ -62,7 +80,21 @@ public class Main extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
+        thread.setDaemon(true);
+        thread.start();
     }
+
+    Thread thread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(0);
+            } catch (InterruptedException exc) {
+                throw new Error("Unexpected interruption", exc);
+            }
+            Platform.runLater(() -> berechne());
+        }
+    });
+
+
 }
