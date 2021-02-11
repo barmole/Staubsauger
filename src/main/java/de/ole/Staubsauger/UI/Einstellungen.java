@@ -27,7 +27,6 @@ public class Einstellungen {
     public void sliderDragDone(MouseEvent dragEvent) {
         geschwindikeitAnzeige.setText(""+geschwindigkeit.getValue());
         roboter.setGeschwindigkeit(geschwindigkeit.getValue());
-        System.out.println(geschwindigkeit.getValue());
     }
 
     public void loeschenSchmutz(){

@@ -32,7 +32,6 @@ public class Roboter {
                 if (kollision(manager)) {
                     fahre(-1);
                     zielRotation = r.nextInt(360);
-                    System.out.println(zielRotation);
                     if (rotation < zielRotation)
                         status = Status.DREHENRECHTS;
                     else
