@@ -33,6 +33,10 @@ public class Steuerung {
             batteriestand.setProgress(roboter.getBatteriestand());
         }
 
+        if(roboter.getStatus() != Status.FAHREN){
+            startToggle.setText("Start");
+        }
+
         beutelinhalt.setProgress(roboter.getBeutelinhalt());
         reparaturstatus.setProgress(roboter.getReparaturstatus());
         restzeit.setText((int)roboter.getRestzeit()+"s");

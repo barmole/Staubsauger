@@ -10,22 +10,9 @@ public class Roboter {
     private double posX, posY, rotation, zielRotation;
     private double batteriestand, beutelinhalt, reparaturstatus;
     private double geschwindigkeit = 1;
-    private double zeitBeiVollemAkku = 300;
-    private double restzeit;
+    private final double zeitBeiVollemAkku = 300;
     Random r = new Random();
-    Status status = Status.IDLE;
-
-    public double getPosX() {
-        return posX;
-    }
-
-    public double getPosY() {
-        return posY;
-    }
-
-    public double getRotation() {
-        return rotation;
-    }
+    Status status;
 
     public Roboter(double posX, double posY, double rotation) {
         this.posX = posX;
@@ -120,6 +107,18 @@ public class Roboter {
         }
     }
 
+    public double getPosX() {
+        return posX;
+    }
+
+    public double getPosY() {
+        return posY;
+    }
+
+    public double getRotation() {
+        return rotation;
+    }
+
     public Status getStatus() {
         return status;
     }
@@ -137,8 +136,7 @@ public class Roboter {
     }
 
     public double getRestzeit() {
-        restzeit = batteriestand*zeitBeiVollemAkku;
-        return restzeit;
+        return batteriestand * zeitBeiVollemAkku;
     }
 
     public void setStatus(Status status) {

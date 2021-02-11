@@ -5,7 +5,7 @@
 
 <AnchorPane prefHeight="207.0" prefWidth="189.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Slider fx:id="geschwindigkeit" accessibleText="Geschwindigkeitsregler" layoutX="25.0" layoutY="32.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="10" onMouseDragged="#sliderDragDone" prefHeight="14.0" prefWidth="113.0" value="1.0" />
+      <Slider fx:id="geschwindigkeit" accessibleText="Geschwindigkeitsregler" layoutX="25.0" layoutY="32.0" majorTickUnit="1.0" max="10.0" minorTickCount="10" onMouseDragged="#sliderDragDone" prefHeight="14.0" prefWidth="113.0" value="1.0" />
       <Button fx:id="streuen" layoutX="26.0" layoutY="113.0" mnemonicParsing="false" onAction="#streuenSchmutz" text="neuen Schmutz streuen" />
       <TextField fx:id="anzahlSchmutz" layoutX="24.0" layoutY="77.0" prefHeight="26.0" prefWidth="141.0" />
       <Button fx:id="loeschen" layoutX="25.0" layoutY="145.0" mnemonicParsing="false" onAction="#loeschenSchmutz" prefHeight="26.0" prefWidth="140.0" text="Schmutz entfernen" />

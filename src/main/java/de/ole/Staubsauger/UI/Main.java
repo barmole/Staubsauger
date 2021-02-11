@@ -11,11 +11,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import lombok.Data;
 
 
-@Data
 public class Main extends Application {
+    public int fps = 60;
     RaumManager manager = new RaumManager();
     RaumFX raumFX = new RaumFX();
     Roboter roboter = new Roboter(200, 40, 0);
@@ -34,13 +33,20 @@ public class Main extends Application {
     }
 
     private void berechne() {
+        long time = System.currentTimeMillis();
+
         roboter.berechne(manager);
         steuerungsController.aktualisieren();
 
         p.getChildren().remove(0);
         p.getChildren().add(new Pane(raumFX.getRaumFX(manager), robotFX.getRobotFX(roboter)));
 
-
+        long delay = (1000 / fps) - (System.currentTimeMillis() - time);
+        if(delay > 0){
+            try{
+                Thread.sleep(delay);
+            }catch(Exception e){};
+        }
         Platform.runLater(this::berechne);
 
     }
