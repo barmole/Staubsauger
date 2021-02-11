@@ -4,5 +4,6 @@ public enum Status {
     IDLE,
     FAHREN,
     DREHENRECHTS,
-    DREHENLINKS
+    DREHENLINKS,
+    LADEN
 }

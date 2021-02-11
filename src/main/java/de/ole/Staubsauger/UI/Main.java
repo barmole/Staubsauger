@@ -18,8 +18,10 @@ import lombok.Data;
 public class Main extends Application {
     RaumManager manager = new RaumManager();
     RaumFX raumFX = new RaumFX();
-    Roboter roboter = new Roboter(200, 200, 0);
+    Roboter roboter = new Roboter(200, 40, 0);
     RobotFX robotFX = new RobotFX();
+
+    Steuerung steuerungsController = new Steuerung(roboter);
 
     Stage simulation;
     Scene raumScene;
@@ -33,6 +35,7 @@ public class Main extends Application {
 
     private void berechne() {
         roboter.berechne(manager);
+        steuerungsController.aktualisieren();
 
         p.getChildren().remove(0);
         p.getChildren().add(new Pane(raumFX.getRaumFX(manager), robotFX.getRobotFX(roboter)));
@@ -71,6 +74,7 @@ public class Main extends Application {
 
             Stage steuerung = new Stage();
             loader = new FXMLLoader(getClass().getResource("/Steuerung.fxml"));
+            loader.setController(steuerungsController);
             rootLayout = loader.load();
             steuerung.setScene(new Scene(rootLayout));
             steuerung.setTitle("Steuerung");
@@ -87,7 +91,7 @@ public class Main extends Application {
     Thread thread = new Thread(new Runnable() {
         @Override
         public void run() {
-            roboter.setStatus(Status.FAHREN);
+            roboter.setStatus(Status.IDLE);
             Platform.runLater(() -> berechne());
         }
     });
