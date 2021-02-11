@@ -1,8 +1,8 @@
 package de.ole.Staubsauger.UI;
 
-import de.ole.Staubsauger.Simulation.Hinderniss;
 import de.ole.Staubsauger.Simulation.RaumManager;
 import de.ole.Staubsauger.Simulation.Roboter;
+import de.ole.Staubsauger.Simulation.Status;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -32,9 +32,7 @@ public class Main extends Application {
     }
 
     private void berechne() {
-        roboter.berechne();
-
-
+        roboter.berechne(manager);
 
         p.getChildren().remove(0);
         p.getChildren().add(new Pane(raumFX.getRaumFX(manager), robotFX.getRobotFX(roboter)));
@@ -92,6 +90,7 @@ public class Main extends Application {
             } catch (InterruptedException exc) {
                 throw new Error("Unexpected interruption", exc);
             }
+            roboter.setStatus(Status.FAHREN);
             Platform.runLater(() -> berechne());
         }
     });

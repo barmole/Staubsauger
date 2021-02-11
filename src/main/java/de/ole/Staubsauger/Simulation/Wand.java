@@ -13,6 +13,7 @@ public class Wand extends Hinderniss {
         this.hoehe = hoehe;
     }
 
+
     public double getPosX() {
         return posX;
     }

@@ -6,7 +6,7 @@ Ein Projekt mit dem Ziel einen Staubsaugroboter zu simulieren
   * [x] Es wird ein Raum erstellt (nicht änderbar) (mit Hindernissen und Schmutz)
   * [x] Der Roboter startet an einer bestimmten Stelle (Ladestation)
   * [x] Der Roboter kann nach vorne fahren 
-  * [ ] Der Roboter erkennt, wenn er eine Wand trifft 
+  * [x] Der Roboter erkennt, wenn er eine Wand trifft 
   * [ ] Der Roboter dreht in eine andere Richtung
   * [ ] Der Roboter fährt nach einer bestimmten Zeit zum Ausgangspunkt zurück
   * [x] Der Roboter hat ein Gesicht
