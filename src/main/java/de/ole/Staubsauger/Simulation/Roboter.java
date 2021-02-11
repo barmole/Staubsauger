@@ -1,7 +1,10 @@
 package de.ole.Staubsauger.Simulation;
 
+import java.util.Random;
+
 public class Roboter {
-    double posX, posY, rotation;
+    double posX, posY, rotation, zielRotation;
+    Random r = new Random();
     Status status = Status.IDLE;
 
     public double getPosX() {
@@ -23,28 +26,39 @@ public class Roboter {
     }
 
 
-
     public void berechne(RaumManager manager) {
-        if (status == Status.FAHREN) {
-            if(kollision(manager)){
-                status = Status.IDLE;
-            }else{
-                posY++;
-            }
+        switch (status) {
+            case FAHREN:
+                if (kollision(manager)) {
+                    zielRotation = r.nextInt(360);
+                    status = Status.DREHEN;
+                } else {
+                    posY++;
+                }
+                break;
 
+            case DREHEN:
+                if (rotation < zielRotation) {
+                    rotation++;
+                }else if(rotation>zielRotation){
+                    rotation--;
+                }else {
+                    status = Status.FAHREN;
+                }
+                break;
         }
-
     }
+
     public void setStatus(Status status) {
         this.status = status;
     }
 
-    boolean kollision(RaumManager manager){
+    boolean kollision(RaumManager manager) {
         for (Hinderniss hinderniss : manager.getHindernisse()) {
-            if (hinderniss.getPosX() < posX + 20 &&
-                    hinderniss.getPosX() + hinderniss.getBreite() >  posX &&
-                    hinderniss.getPosY() <  posY + 20 &&
-                    hinderniss.getPosY() + hinderniss.getHoehe() > posY) {
+            if (hinderniss.getPosX() <= posX + 20 &&
+                    hinderniss.getPosX() + hinderniss.getBreite() >= posX &&
+                    hinderniss.getPosY() <= posY + 20 &&
+                    hinderniss.getPosY() + hinderniss.getHoehe() >= posY) {
                 return true;
             }
         }

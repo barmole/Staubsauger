@@ -7,7 +7,8 @@ Ein Projekt mit dem Ziel einen Staubsaugroboter zu simulieren
   * [x] Der Roboter startet an einer bestimmten Stelle (Ladestation)
   * [x] Der Roboter kann nach vorne fahren 
   * [x] Der Roboter erkennt, wenn er eine Wand trifft 
-  * [ ] Der Roboter dreht in eine andere Richtung
+  * [x] Der Roboter dreht in eine andere Richtung
+  * [ ] Der Roboter fährt in die neue Richtung weiter
   * [ ] Der Roboter fährt nach einer bestimmten Zeit zum Ausgangspunkt zurück
   * [x] Der Roboter hat ein Gesicht
   * [ ] Der Roboter saugt beim Fahren kleine Pixel weg
