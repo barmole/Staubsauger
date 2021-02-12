@@ -72,7 +72,7 @@ public class Steuerung {
     }
 
     public void aufladen() {
-        roboter.setStatus(Status.LADEN);
+        roboter.setStatus(Status.RUECKWEG);
     }
 
     public void setzeSaugzeit(){

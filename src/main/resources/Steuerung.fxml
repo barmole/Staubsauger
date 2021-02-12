@@ -18,7 +18,7 @@
       <Label fx:id="status" layoutX="344.0" layoutY="138.0" text="Status: RECHTSDREHEN" />
       <ComboBox fx:id="wochentag" layoutX="344.0" layoutY="9.0" prefHeight="26.0" prefWidth="126.0" promptText="Wochentag" />
       <Spinner fx:id="stunde" editable="true" layoutX="343.0" layoutY="44.0" prefHeight="26.0" prefWidth="53.0" />
-      <Spinner fx:id="minute" layoutX="415.0" layoutY="44.0" prefHeight="26.0" prefWidth="53.0" />
+      <Spinner fx:id="minute" editable="true" layoutX="415.0" layoutY="44.0" prefHeight="26.0" prefWidth="53.0" />
       <Button layoutX="343.0" layoutY="77.0" mnemonicParsing="false" onAction="#setzeSaugzeit" prefHeight="26.0" prefWidth="126.0" text="setze Saugzeit" />
    </children>
 </AnchorPane>
