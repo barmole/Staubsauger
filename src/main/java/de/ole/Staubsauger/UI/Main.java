@@ -6,10 +6,12 @@ import de.ole.Staubsauger.Simulation.Status;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 
@@ -39,13 +41,36 @@ public class Main extends Application {
         steuerungsController.aktualisieren();
 
         p.getChildren().remove(0);
-        p.getChildren().add(new Pane(raumFX.getRaumFX(manager), robotFX.getRobotFX(roboter)));
+
+        Group roboterGruppe = robotFX.getRobotFX(roboter);
+        Group raumGruppe = raumFX.getRaumFX(manager);
+
+        if (roboterGruppe.getChildren().size() == 2) {
+            var laser = roboterGruppe.getChildren().get(1);
+            var ladestation = raumGruppe.getChildren().get(0);
+
+            roboter.stationGefunden = Shape.intersect((Shape) laser, (Shape) ladestation).getLayoutBounds().getWidth() > 0;
+            roboterGruppe.getChildren().add(Shape.intersect((Shape) laser, (Shape) ladestation));
+
+        }
+
+        if (roboter.getStatus() == Status.RUECKWEG) {
+            var roboterFX = roboterGruppe.getChildren().get(0);
+            var ladestation = raumGruppe.getChildren().get(0);
+            roboter.stehtAufLadestation = Shape.intersect((Shape) roboterFX, (Shape) ladestation).getLayoutBounds().getWidth() > 0;
+
+        }
+
+        Pane pane = new Pane(raumGruppe, roboterGruppe);
+        p.getChildren().add(pane);
 
         long delay = (1000 / fps) - (System.currentTimeMillis() - time);
-        if(delay > 0){
-            try{
+        if (delay > 0) {
+            try {
                 Thread.sleep(delay);
-            }catch(Exception e){};
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         Platform.runLater(this::berechne);
 
@@ -74,7 +99,7 @@ public class Main extends Application {
             AnchorPane rootLayout = loader.load();
             einstellungen.setScene(new Scene(rootLayout));
             einstellungen.setTitle("Einstellungen");
-            einstellungen.setX(400);
+            einstellungen.setX(manager.getBreite());
             einstellungen.setY(0);
             einstellungen.show();
 
@@ -85,7 +110,7 @@ public class Main extends Application {
             steuerung.setScene(new Scene(rootLayout));
             steuerung.setTitle("Steuerung");
             steuerung.setX(0);
-            steuerung.setY(430);
+            steuerung.setY(manager.getHoehe() + 30);
             steuerung.show();
         } catch (Exception e) {
             e.printStackTrace();

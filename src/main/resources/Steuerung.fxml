@@ -16,5 +16,6 @@
       <Label layoutX="194.0" layoutY="138.0" text="Reparaturstatus" />
       <Button layoutX="204.0" layoutY="74.0" mnemonicParsing="false" onAction="#aufladen" text="Aufladen" />
       <DatePicker layoutX="305.0" layoutY="18.0" prefHeight="26.0" prefWidth="105.0" />
+      <Label fx:id="status" layoutX="305.0" layoutY="125.0" text="Status:" />
    </children>
 </AnchorPane>

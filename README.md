@@ -1,6 +1,7 @@
 # Staubsauger
 Ein Projekt mit dem Ziel einen Staubsaugroboter zu simulieren
 
+
 ## erforderliche Kriterien:
 * Staubsaugrobotersimulation
   * [x] Es wird ein Raum erstellt (nicht änderbar) (mit Hindernissen und Schmutz)
@@ -9,7 +10,7 @@ Ein Projekt mit dem Ziel einen Staubsaugroboter zu simulieren
   * [x] Der Roboter erkennt, wenn er eine Wand trifft 
   * [x] Der Roboter dreht in eine andere Richtung
   * [x] Der Roboter fährt in die neue Richtung weiter
-  * [ ] Der Roboter fährt nach einer bestimmten Zeit zum Ausgangspunkt zurück
+  * [x] Der Roboter fährt nach einer bestimmten Zeit zum Ausgangspunkt zurück (bei 25% Akku)
   * [x] Der Roboter hat ein Gesicht
   * [x] Der Roboter saugt beim Fahren kleine Pixel weg
   * [x] Der Roboter hat einen Batteriestand, Beutelinhalt, Reparaturstatus

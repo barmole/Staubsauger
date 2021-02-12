@@ -50,6 +50,14 @@ public class RaumManager {
         return ladestation;
     }
 
+    public int getBreite() {
+        return breite;
+    }
+
+    public int getHoehe() {
+        return hoehe;
+    }
+
     public void loescheSchmutz() {
         schmutzTeilchen.clear();
     }

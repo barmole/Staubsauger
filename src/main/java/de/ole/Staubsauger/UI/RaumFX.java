@@ -13,6 +13,10 @@ public class RaumFX {
 
     public Group getRaumFX(RaumManager raum) {
         Group raumFX = new Group();
+        Circle ladestationFX = new Circle(raum.getLadestation().getPosX(), raum.getLadestation().getPosY(), 5);
+        ladestationFX.setFill(Color.ORANGE);
+        raumFX.getChildren().add(ladestationFX);
+
         for (Schmutz schmutz : raum.getSchmutzTeilchen()) {
             Circle s = new Circle(schmutz.getPosX(), schmutz.getPosY(), 1);
             s.setFill(Color.LIGHTGRAY);
@@ -25,11 +29,6 @@ public class RaumFX {
                 raumFX.getChildren().add(wand);
             }
         }
-
-        Circle ladestationFX = new Circle(raum.getLadestation().getPosX(), raum.getLadestation().getPosY(), 5);
-        ladestationFX.setFill(Color.ORANGERED);
-        raumFX.getChildren().add(ladestationFX);
-
 
         return raumFX;
     }

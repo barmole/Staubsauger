@@ -11,6 +11,8 @@ public class Roboter {
     private double batteriestand, beutelinhalt, reparaturstatus;
     private double geschwindigkeit = 1;
     private final double zeitBeiVollemAkku = 300;
+    public boolean laserAn, stationGefunden,stehtAufLadestation;
+
     Random r = new Random();
     Status status;
 
@@ -26,7 +28,6 @@ public class Roboter {
 
 
     public void berechne(RaumManager manager) {
-
         switch (status) {
             case FAHREN:
                 if (kollision(manager)) {
@@ -40,11 +41,14 @@ public class Roboter {
                     ueberpruefeSchmutz(manager);
                     fahre(1);
                 }
+
+
+                if (batteriestand <= 0.25) status = Status.RUECKWEG;
                 break;
 
             case DREHENRECHTS:
                 if (rotation < zielRotation)
-                    rotation += 2 * geschwindigkeit;
+                    dreheRechts(2);
                 else
                     status = Status.FAHREN;
 
@@ -52,7 +56,7 @@ public class Roboter {
 
             case DREHENLINKS:
                 if (rotation > zielRotation)
-                    rotation -= 2 * geschwindigkeit;
+                    dreheLinks(2);
                 else
                     status = Status.FAHREN;
 
@@ -60,13 +64,58 @@ public class Roboter {
 
             case LADEN:
                 if (batteriestand < 1) {
-                    batteriestand += 0.001 * geschwindigkeit;
+                    batteriestand += 0.0001 * geschwindigkeit;
                     System.out.println(batteriestand);
                 } else {
+                    batteriestand = 1;
                     status = Status.IDLE;
                 }
+                break;
+
+            case RUECKWEG:
+                if (!stationGefunden) {
+                    if (rotation > 0) {
+                        zielRotation = 0;
+                        status = Status.DREHENLINKS;
+                    } else {
+                        status = Status.RAUMSCAN;
+                    }
+                }else if(!stehtAufLadestation){
+                    if(!kollision(manager)) {
+                        fahre(1);
+                    }else{
+                        stationGefunden = false;
+                        fahre(-1);
+                        status = Status.RAUMSCAN;
+                    }
+                }else if(rotation>0){
+                    dreheLinks(2);
+                }else{
+                    stationGefunden = false;
+                    stehtAufLadestation = false;
+                    status = Status.LADEN;
+                }
+                break;
+
+            case RAUMSCAN:
+                laserAn = true;
+                if (rotation < 360 && !stationGefunden) {
+                    dreheRechts(1/geschwindigkeit);
+                } else {
+                    laserAn = false;
+                    status = Status.RUECKWEG;
+                }
+                break;
         }
 
+    }
+
+    private void dreheRechts(double v) {
+        rotation += v * geschwindigkeit;
+    }
+
+    private void dreheLinks(double v) {
+        rotation -= v * geschwindigkeit;
     }
 
     private void fahre(double strecke) {
@@ -83,7 +132,7 @@ public class Roboter {
                     hinderniss.getPosX() + hinderniss.getBreite() >= posX - 20 &&
                     hinderniss.getPosY() <= posY + 20 &&
                     hinderniss.getPosY() + hinderniss.getHoehe() >= posY - 20) {
-                reparaturstatus -= 0.01;
+                reparaturstatus -= 0.001;
                 return true;
             }
         }

@@ -9,8 +9,8 @@ import javafx.scene.control.ProgressBar;
 public class Steuerung {
     private final Roboter roboter;
     public Button startToggle;
-    public ProgressBar batteriestand,beutelinhalt,reparaturstatus;
-    public Label restzeit;
+    public ProgressBar batteriestand, beutelinhalt, reparaturstatus;
+    public Label restzeit, status;
 
     public Steuerung(Roboter roboter) {
         this.roboter = roboter;
@@ -33,20 +33,21 @@ public class Steuerung {
             batteriestand.setProgress(roboter.getBatteriestand());
         }
 
-        if(roboter.getStatus() != Status.FAHREN){
+        if (roboter.getStatus() == Status.IDLE || roboter.getStatus() == Status.LADEN) {
             startToggle.setText("Start");
         }
 
         beutelinhalt.setProgress(roboter.getBeutelinhalt());
         reparaturstatus.setProgress(roboter.getReparaturstatus());
-        restzeit.setText((int)roboter.getRestzeit()+"s");
+        restzeit.setText((int) roboter.getRestzeit() + "s");
+        status.setText("Status: " + roboter.getStatus().toString());
     }
 
-    public void leerenStaubfach(){
+    public void leerenStaubfach() {
         roboter.leereStaubfach();
     }
 
-    public void aufladen(){
+    public void aufladen() {
         roboter.setStatus(Status.LADEN);
     }
 }

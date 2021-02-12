@@ -5,5 +5,7 @@ public enum Status {
     FAHREN,
     DREHENRECHTS,
     DREHENLINKS,
+    RAUMSCAN,
+    RUECKWEG,
     LADEN
 }
