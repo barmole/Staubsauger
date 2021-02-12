@@ -42,4 +42,10 @@ Ein Projekt mit dem Ziel einen Staubsaugroboter zu simulieren
 
 * Kotstop
   * [x] Der Roboter stoppt, wenn er auf weiche Gegenstände trifft
+  
+##Anleitung
+Zum Starten des Programms den Gradle-Task **run** ausführen
+
+##Infos
+Das Programm wurde mit Java 15 entwickelt
 
