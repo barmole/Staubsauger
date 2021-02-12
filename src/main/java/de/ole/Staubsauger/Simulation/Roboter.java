@@ -1,6 +1,8 @@
 package de.ole.Staubsauger.Simulation;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 import static java.lang.Math.cos;
@@ -11,7 +13,12 @@ public class Roboter {
     private double batteriestand, beutelinhalt, reparaturstatus;
     private double geschwindigkeit = 1;
     private final double zeitBeiVollemAkku = 300;
-    public boolean laserAn, stationGefunden,stehtAufLadestation;
+    public boolean laserAn, stationGefunden, stehtAufLadestation;
+    public String putzTag = "";
+    public int putzStunde, putzMinute;
+
+    Date datum;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE");
 
     Random r = new Random();
     Status status;
@@ -29,6 +36,14 @@ public class Roboter {
 
     public void berechne(RaumManager manager) {
         switch (status) {
+            case IDLE:
+                datum = new Date();
+                if (putzTag.equals(dateFormat.format(datum)) &&
+                        putzStunde == datum.getHours() &&
+                        putzMinute == datum.getMinutes()) {
+                    status = Status.FAHREN;
+                }
+                break;
             case FAHREN:
                 if (kollision(manager)) {
                     fahre(-1);
@@ -65,7 +80,6 @@ public class Roboter {
             case LADEN:
                 if (batteriestand < 1) {
                     batteriestand += 0.0001 * geschwindigkeit;
-                    System.out.println(batteriestand);
                 } else {
                     batteriestand = 1;
                     status = Status.IDLE;
@@ -80,17 +94,17 @@ public class Roboter {
                     } else {
                         status = Status.RAUMSCAN;
                     }
-                }else if(!stehtAufLadestation){
-                    if(!kollision(manager)) {
+                } else if (!stehtAufLadestation) {
+                    if (!kollision(manager)) {
                         fahre(1);
-                    }else{
+                    } else {
                         stationGefunden = false;
                         fahre(-1);
                         status = Status.RAUMSCAN;
                     }
-                }else if(rotation>0){
+                } else if (rotation > 0) {
                     dreheLinks(2);
-                }else{
+                } else {
                     stationGefunden = false;
                     stehtAufLadestation = false;
                     status = Status.LADEN;
@@ -100,7 +114,7 @@ public class Roboter {
             case RAUMSCAN:
                 laserAn = true;
                 if (rotation < 360 && !stationGefunden) {
-                    dreheRechts(1/geschwindigkeit);
+                    dreheRechts(1 / geschwindigkeit);
                 } else {
                     laserAn = false;
                     status = Status.RUECKWEG;

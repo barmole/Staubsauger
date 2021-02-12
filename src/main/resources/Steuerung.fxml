@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="169.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="169.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ProgressBar fx:id="batteriestand" layoutX="-5.0" layoutY="64.0" prefHeight="47.0" prefWidth="103.0" progress="0.0" rotate="-90.0" />
       <Label layoutX="14.0" layoutY="14.0" text="Bateriestand" />
@@ -15,7 +15,10 @@
       <ProgressBar fx:id="reparaturstatus" layoutX="183.0" layoutY="116.0" prefHeight="18.0" prefWidth="105.0" progress="0.0" />
       <Label layoutX="194.0" layoutY="138.0" text="Reparaturstatus" />
       <Button layoutX="204.0" layoutY="74.0" mnemonicParsing="false" onAction="#aufladen" text="Aufladen" />
-      <DatePicker layoutX="305.0" layoutY="18.0" prefHeight="26.0" prefWidth="105.0" />
-      <Label fx:id="status" layoutX="305.0" layoutY="125.0" text="Status:" />
+      <Label fx:id="status" layoutX="344.0" layoutY="138.0" text="Status: RECHTSDREHEN" />
+      <ComboBox fx:id="wochentag" layoutX="344.0" layoutY="9.0" prefHeight="26.0" prefWidth="126.0" promptText="Wochentag" />
+      <Spinner fx:id="stunde" editable="true" layoutX="343.0" layoutY="44.0" prefHeight="26.0" prefWidth="53.0" />
+      <Spinner fx:id="minute" layoutX="415.0" layoutY="44.0" prefHeight="26.0" prefWidth="53.0" />
+      <Button layoutX="343.0" layoutY="77.0" mnemonicParsing="false" onAction="#setzeSaugzeit" prefHeight="26.0" prefWidth="126.0" text="setze Saugzeit" />
    </children>
 </AnchorPane>

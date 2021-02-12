@@ -2,18 +2,42 @@ package de.ole.Staubsauger.UI;
 
 import de.ole.Staubsauger.Simulation.Roboter;
 import de.ole.Staubsauger.Simulation.Status;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.*;
 
 public class Steuerung {
     private final Roboter roboter;
     public Button startToggle;
     public ProgressBar batteriestand, beutelinhalt, reparaturstatus;
     public Label restzeit, status;
+    public ComboBox<String> wochentag;
+    public Spinner<Integer> stunde,minute;
 
     public Steuerung(Roboter roboter) {
         this.roboter = roboter;
+    }
+
+    public void initialize(){
+        ObservableList<String> options =
+                FXCollections.observableArrayList(
+                        "Montag",
+                        "Dienstag",
+                        "Mittwoch",
+                        "Donnerstag",
+                        "Freitag",
+                        "Samstag",
+                        "Sonntag"
+                );
+        wochentag.getItems().addAll(options);
+
+        SpinnerValueFactory<Integer> svfStunde = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 1);
+        stunde.setValueFactory(svfStunde);
+        SpinnerValueFactory<Integer> svfMinute = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 1);
+        minute.setValueFactory(svfMinute);
+
+        stunde.getValueFactory().setValue(roboter.putzStunde);
+        minute.getValueFactory().setValue(roboter.putzMinute);
     }
 
     public void toggleStart() {
@@ -49,5 +73,11 @@ public class Steuerung {
 
     public void aufladen() {
         roboter.setStatus(Status.LADEN);
+    }
+
+    public void setzeSaugzeit(){
+        roboter.putzTag = wochentag.getValue();
+        roboter.putzStunde = stunde.getValue();
+        roboter.putzMinute = minute.getValue();
     }
 }

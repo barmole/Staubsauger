@@ -19,7 +19,7 @@ Ein Projekt mit dem Ziel einen Staubsaugroboter zu simulieren
 
 * UI zum Bedienen des Roboters 
   * [x] starten/stoppen der Saugfunktion
-  * [ ] einstellen von Saugzeiten
+  * [x] einstellen von Saugzeiten
   * [x] zeigt den Batteriestand, Beutelinhalt, Reparaturstatus, verbleibende Saugzeit an
   
 
