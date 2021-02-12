@@ -7,5 +7,6 @@ public enum Status {
     DREHENLINKS,
     RAUMSCAN,
     RUECKWEG,
-    LADEN
+    LADEN,
+    KOTSTOP
 }

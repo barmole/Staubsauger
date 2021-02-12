@@ -37,4 +37,8 @@ public class Einstellungen {
         System.out.println(anzahlSchmutz.getText());
         raum.streueSchmutz(Integer.parseInt(anzahlSchmutz.getText()));
     }
+
+    public void legeKot(){
+        raum.legeKot();
+    }
 }

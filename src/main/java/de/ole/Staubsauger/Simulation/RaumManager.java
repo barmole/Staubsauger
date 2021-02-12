@@ -69,4 +69,10 @@ public class RaumManager {
             schmutzTeilchen.add(new Schmutz(randomX, randomY));
         }
     }
+
+    public void legeKot() {
+        double randomX = r.nextInt(breite);
+        double randomY = r.nextInt(hoehe);
+        hindernisse.add(new Kot(randomX,randomY));
+    }
 }

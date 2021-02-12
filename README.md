@@ -41,5 +41,5 @@ Ein Projekt mit dem Ziel einen Staubsaugroboter zu simulieren
   
 
 * Kotstop
-  * [ ] Der Roboter stoppt, wenn er auf weiche Gegenstände trifft
+  * [x] Der Roboter stoppt, wenn er auf weiche Gegenstände trifft
 

@@ -22,6 +22,7 @@ public class Roboter {
 
     Random r = new Random();
     Status status;
+    private boolean kotstop;
 
     public Roboter(double posX, double posY, double rotation) {
         this.posX = posX;
@@ -46,12 +47,18 @@ public class Roboter {
                 break;
             case FAHREN:
                 if (kollision(manager)) {
+                    if (kotstop){
+                        status = Status.KOTSTOP;
+                        break;
+                    }
+
                     fahre(-1);
                     zielRotation = r.nextInt(360);
                     if (rotation < zielRotation)
                         status = Status.DREHENRECHTS;
                     else
                         status = Status.DREHENLINKS;
+
                 } else {
                     ueberpruefeSchmutz(manager);
                     fahre(1);
@@ -120,6 +127,9 @@ public class Roboter {
                     status = Status.RUECKWEG;
                 }
                 break;
+
+            case KOTSTOP:
+                break;
         }
 
     }
@@ -147,6 +157,9 @@ public class Roboter {
                     hinderniss.getPosY() <= posY + 20 &&
                     hinderniss.getPosY() + hinderniss.getHoehe() >= posY - 20) {
                 reparaturstatus -= 0.001;
+                if(hinderniss.getClass() == Kot.class){
+                    kotstop = true;
+                }
                 return true;
             }
         }

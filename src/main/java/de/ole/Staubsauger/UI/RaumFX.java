@@ -1,9 +1,6 @@
 package de.ole.Staubsauger.UI;
 
-import de.ole.Staubsauger.Simulation.Hinderniss;
-import de.ole.Staubsauger.Simulation.RaumManager;
-import de.ole.Staubsauger.Simulation.Schmutz;
-import de.ole.Staubsauger.Simulation.Wand;
+import de.ole.Staubsauger.Simulation.*;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -27,6 +24,12 @@ public class RaumFX {
             if (hinderniss.getClass() == Wand.class) {
                 Rectangle wand = new Rectangle(((Wand) hinderniss).getPosX(), ((Wand) hinderniss).getPosY(), ((Wand) hinderniss).getBreite(), ((Wand) hinderniss).getHoehe());
                 raumFX.getChildren().add(wand);
+            }
+
+            if(hinderniss.getClass() == Kot.class){
+                Circle kot = new Circle(hinderniss.getPosX(),hinderniss.getPosY(),hinderniss.getBreite());
+                kot.setFill(Color.BROWN);
+                raumFX.getChildren().add(kot);
             }
         }
 
