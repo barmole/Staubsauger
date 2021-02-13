@@ -8,5 +8,5 @@ public enum Status {
     RAUMSCAN,
     RUECKWEG,
     LADEN,
-    KOTSTOP
+    KOTSTOP;
 }

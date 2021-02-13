@@ -38,100 +38,127 @@ public class Roboter {
     public void berechne(RaumManager manager) {
         switch (status) {
             case IDLE:
-                datum = new Date();
-                if (putzTag.equals(dateFormat.format(datum)) &&
-                        putzStunde == datum.getHours() &&
-                        putzMinute == datum.getMinutes()) {
-                    status = Status.FAHREN;
-                }
+                idle();
                 break;
+
             case FAHREN:
-                if (kollision(manager)) {
-                    if (kotstop){
-                        status = Status.KOTSTOP;
-                        break;
-                    }
-
-                    fahre(-1);
-                    zielRotation = r.nextInt(360);
-                    if (rotation < zielRotation)
-                        status = Status.DREHENRECHTS;
-                    else
-                        status = Status.DREHENLINKS;
-
-                } else {
-                    ueberpruefeSchmutz(manager);
-                    fahre(1);
-                }
-
-
-                if (batteriestand <= 0.25) status = Status.RUECKWEG;
+                berechneFahren(manager);
                 break;
 
             case DREHENRECHTS:
-                if (rotation < zielRotation)
-                    dreheRechts(2);
-                else
-                    status = Status.FAHREN;
-
+                dreheRechtsBisZiel();
                 break;
 
             case DREHENLINKS:
-                if (rotation > zielRotation)
-                    dreheLinks(2);
-                else
-                    status = Status.FAHREN;
-
+                dreheLinksBisZiel();
                 break;
 
             case LADEN:
-                if (batteriestand < 1) {
-                    batteriestand += 0.0001 * geschwindigkeit;
-                } else {
-                    batteriestand = 1;
-                    status = Status.IDLE;
-                }
+                lade();
                 break;
 
             case RUECKWEG:
-                if (!stationGefunden) {
-                    if (rotation > 0) {
-                        zielRotation = 0;
-                        status = Status.DREHENLINKS;
-                    } else {
-                        status = Status.RAUMSCAN;
-                    }
-                } else if (!stehtAufLadestation) {
-                    if (!kollision(manager)) {
-                        fahre(1);
-                    } else {
-                        stationGefunden = false;
-                        fahre(-1);
-                        status = Status.RAUMSCAN;
-                    }
-                } else if (rotation > 0) {
-                    dreheLinks(2);
-                } else {
-                    stationGefunden = false;
-                    stehtAufLadestation = false;
-                    status = Status.LADEN;
-                }
+                geheZurueck(manager);
                 break;
 
             case RAUMSCAN:
-                laserAn = true;
-                if (rotation < 360 && !stationGefunden) {
-                    dreheRechts(1 / geschwindigkeit);
-                } else {
-                    laserAn = false;
-                    status = Status.RUECKWEG;
-                }
+                scanneRaum();
                 break;
 
             case KOTSTOP:
                 break;
         }
 
+    }
+
+    private void idle() {
+        datum = new Date();
+        if (putzTag.equals(dateFormat.format(datum)) &&
+                putzStunde == datum.getHours() &&
+                putzMinute == datum.getMinutes()) {
+            status = Status.FAHREN;
+        }
+    }
+
+    private void berechneFahren(RaumManager manager) {
+        if (kollision(manager)) {
+            if (kotstop){
+                status = Status.KOTSTOP;
+                return;
+            }
+
+            fahre(-1);
+            zielRotation = r.nextInt(360);
+            if (rotation < zielRotation)
+                status = Status.DREHENRECHTS;
+            else
+                status = Status.DREHENLINKS;
+
+        } else {
+            ueberpruefeSchmutz(manager);
+            fahre(1);
+        }
+
+
+        if (batteriestand <= 0.25) status = Status.RUECKWEG;
+    }
+
+    private void dreheRechtsBisZiel() {
+        if (rotation < zielRotation)
+            dreheRechts(2);
+        else
+            status = Status.FAHREN;
+    }
+
+    private void dreheLinksBisZiel() {
+        if (rotation > zielRotation)
+            dreheLinks(2);
+        else
+            status = Status.FAHREN;
+    }
+
+    private void lade() {
+        if (batteriestand < 1) {
+            batteriestand += 0.0001 * geschwindigkeit;
+        } else {
+            batteriestand = 1;
+            status = Status.IDLE;
+        }
+    }
+
+    private void geheZurueck(RaumManager manager) {
+        if (!stationGefunden) {
+            if (rotation > 0) {
+                zielRotation = 0;
+                status = Status.DREHENLINKS;
+            } else {
+                status = Status.RAUMSCAN;
+            }
+        } else if (!stehtAufLadestation) {
+            if (!kollision(manager)) {
+                fahre(1);
+            } else {
+                stationGefunden = false;
+                fahre(-1);
+                status = Status.RAUMSCAN;
+            }
+        } else if (rotation > 0) {
+            dreheLinks(2);
+        } else {
+            stationGefunden = false;
+            stehtAufLadestation = false;
+            status = Status.LADEN;
+        }
+    }
+
+    private void scanneRaum() {
+        laserAn = true;
+        if (rotation < 360 && !stationGefunden) {
+            dreheRechts(1 / geschwindigkeit);
+        } else {
+            laserAn = false;
+            status = Status.RUECKWEG;
+        }
     }
 
     private void dreheRechts(double v) {

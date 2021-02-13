@@ -14,7 +14,7 @@ public class RobotFX {
         Group robotFX = new Group();
 
         Circle r = new Circle(roboter.getPosX(), roboter.getPosY(), 20);
-        r.setFill(new ImagePattern(new Image("file:src/main/resources/Gesicht.png"),-1.5,-0.5,4,1.5,true));
+        r.setFill(new ImagePattern(new Image(getClass().getResource("/Gesicht.png").toString()),-1.5,-0.5,4,1.5,true));
 
         Rotate rotation = new Rotate(roboter.getRotation(),roboter.getPosX(),roboter.getPosY());
         r.getTransforms().add(rotation);

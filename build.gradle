@@ -2,10 +2,12 @@ plugins {
 	id 'java'
 	id 'application'
 	id 'org.openjfx.javafxplugin' version '0.0.9'
+	id 'edu.sc.seis.launch4j' version '2.4.9'
+	id "org.springframework.boot" version "2.0.1.RELEASE"
 }
 
 group 'org.example'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 repositories {
 	mavenCentral()
@@ -17,6 +19,9 @@ dependencies {
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
+apply plugin: 'java'
+apply plugin: 'edu.sc.seis.launch4j'
+
 test {
 	useJUnitPlatform()
 }
@@ -26,4 +31,24 @@ javafx {
 	modules = [ 'javafx.controls','javafx.fxml' ]
 }
 
+launch4j {
+	mainClassName = 'de.ole.Staubsauger.UI.Main'
+}
+
+jar {
+	manifest {
+		attributes 'Main-Class': 'de.ole.Staubsauger.UI.Main'
+	}
+}
+
 mainClassName = 'de.ole.Staubsauger.UI.Main'
+
+bootRun {
+	doFirst {
+		jvmArgs = [
+				'--module-path', classpath.asPath,
+				'--add-modules', 'javafx.controls',
+				'--add-modules', 'javafx.fxml'
+		]
+	}
+}
