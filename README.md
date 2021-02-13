@@ -23,7 +23,7 @@ Ein Projekt mit dem Ziel einen Staubsaugroboter zu simulieren
   * [x] zeigt den Batteriestand, Beutelinhalt, Reparaturstatus, verbleibende Saugzeit an
   
 
-* UI zum beeiflussen der Simulation
+* UI zum beeinflussen der Simulation
   * [x] Geschwindigkeit
   * [x] Schmutz löschen/erstellen
   
