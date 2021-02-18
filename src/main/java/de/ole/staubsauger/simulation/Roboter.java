@@ -323,22 +323,42 @@ public class Roboter {
         return beutelinhalt;
     }
 
+    /**
+     * Gibt den Reparaturstatus des Roboters zurück
+     * @return reparaturstatus
+     */
     public double getReparaturstatus() {
         return reparaturstatus;
     }
 
+    /**
+     * Gibt die Restzeit des Roboters zurück
+     * Die Restzeit ergibt sich aus Bateriestand und Zeit
+     * @return restzeit
+     */
     public double getRestzeit() {
         return batteriestand * ZEIT_BEI_VOLLEM_AKKU;
     }
 
+    /**
+     * Setzt den Status des Roboters
+     * @param status Der Status der gesetzt werden soll
+     */
     public void setStatus(Status status) {
         this.status = status;
     }
 
+    /**
+     * Setzt die Geschwindigkeit des Roboters zurück
+     * @param geschwindigkeit Die Geschwindigkeit des Roboters, die gesetzt werden soll
+     */
     public void setGeschwindigkeit(double geschwindigkeit) {
         this.geschwindigkeit = geschwindigkeit;
     }
 
+    /**
+     * Setzt den Beutelinhalt des Roboters auf 0
+     */
     public void leereStaubfach() {
         beutelinhalt = 0;
     }
