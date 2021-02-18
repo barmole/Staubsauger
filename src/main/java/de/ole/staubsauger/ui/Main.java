@@ -118,12 +118,9 @@ public class Main extends Application {
         thread.start();
     }
 
-    Thread thread = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            roboter.setStatus(Status.IDLE);
-            Platform.runLater(() -> berechne());
-        }
+    Thread thread = new Thread(() -> {
+        roboter.setStatus(Status.IDLE);
+        Platform.runLater(this::berechne);
     });
 
 

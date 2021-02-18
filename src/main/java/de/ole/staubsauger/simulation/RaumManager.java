@@ -63,8 +63,8 @@ public class RaumManager {
         schmutzTeilchen.clear();
     }
 
-    public void streueSchmutz(int Anzahl){
-        for (int i = 0; i < Anzahl; i++) {
+    public void streueSchmutz(int anzahl) {
+        for (int i = 0; i < anzahl; i++) {
             double randomX = r.nextInt(breite);
             double randomY = r.nextInt(hoehe);
             schmutzTeilchen.add(new Schmutz(randomX, randomY));

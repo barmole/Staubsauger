@@ -9,15 +9,23 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
 public class Roboter {
-    private double posX, posY, rotation, zielRotation;
-    private double batteriestand, beutelinhalt, reparaturstatus;
-    private double geschwindigkeit = 1;
-    private final double zeitBeiVollemAkku = 300;
-    public boolean laserAn, stationGefunden, stehtAufLadestation;
+    public boolean laserAn;
+    public boolean stationGefunden;
+    public boolean stehtAufLadestation;
     public String putzTag = "";
-    public int putzStunde, putzMinute;
+    public int putzStunde;
+    public int putzMinute;
 
-    Date datum;
+    private double posX;
+    private double posY;
+    private double rotation;
+    private double zielRotation;
+    private double batteriestand;
+    private double beutelinhalt;
+    private double reparaturstatus;
+    private double geschwindigkeit = 1;
+    private static final double ZEIT_BEI_VOLLEM_AKKU = 300;
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE");
 
     Random r = new Random();

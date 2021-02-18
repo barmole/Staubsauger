@@ -9,10 +9,14 @@ import javafx.scene.control.*;
 public class Steuerung {
     private final Roboter roboter;
     public Button startToggle;
-    public ProgressBar batteriestand, beutelinhalt, reparaturstatus;
-    public Label restzeit, status;
+    public ProgressBar batteriestand;
+    public ProgressBar beutelinhalt;
+    public ProgressBar reparaturstatus;
+    public Label restzeit;
+    public Label status;
     public ComboBox<String> wochentag;
-    public Spinner<Integer> stunde,minute;
+    public Spinner<Integer> stunde;
+    public Spinner<Integer> minute;
 
     public Steuerung(Roboter roboter) {
         this.roboter = roboter;

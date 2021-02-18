@@ -8,21 +8,4 @@ public class Wand extends Hinderniss {
         this.breite = breite;
         this.hoehe = hoehe;
     }
-
-
-    public double getPosX() {
-        return posX;
-    }
-
-    public double getPosY() {
-        return posY;
-    }
-
-    public double getBreite() {
-        return breite;
-    }
-
-    public double getHoehe() {
-        return hoehe;
-    }
 }
