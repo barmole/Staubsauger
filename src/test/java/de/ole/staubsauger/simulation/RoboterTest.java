@@ -10,18 +10,6 @@ class RoboterTest {
     RaumManager manager = new RaumManager();
 
     @Test
-    void berechne() {
-    }
-
-    @Test
-    void kollision() {
-    }
-
-    @Test
-    void ueberpruefeSchmutz() {
-    }
-
-    @Test
     void getPosX() {
         assertEquals(100, roboter.getPosX());
         assertNotEquals(200, roboter.getPosX());
@@ -87,6 +75,7 @@ class RoboterTest {
 
     @Test
     void getRestzeit() {
+        assertEquals(300, roboter.getRestzeit());
     }
 
     @Test
