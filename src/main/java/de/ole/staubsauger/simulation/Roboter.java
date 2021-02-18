@@ -32,6 +32,12 @@ public class Roboter {
     Status status;
     private boolean kotstop;
 
+    /**
+     * Erzeugt einen Roboter im Raum
+     * @param posX Start X-Position des Roboters
+     * @param posY Start Y-Position des Roboters
+     * @param rotation Anfangsrotation
+     */
     public Roboter(double posX, double posY, double rotation) {
         this.posX = posX;
         this.posY = posY;
@@ -43,7 +49,10 @@ public class Roboter {
         reparaturstatus = 1;
     }
 
-
+    /**
+     * Berchnet, was der Roboter bei welchem Status ausführen soll
+     * @param manager RaumManager
+     */
     public void berechne(RaumManager manager) {
         switch (status) {
             case IDLE:
@@ -80,7 +89,10 @@ public class Roboter {
 
     }
 
-    private void idle() {
+    /**
+     * Checkt, ob jetzt ein Putztag ist und wenn, dann wird der Status auf FAHREN gestzt
+     */
+    private void ueberpruefePutztag() {
 
         if (putzTag.equals(LocalDateTime.now().format(dateFormat)) &&
                 putzStunde == LocalDateTime.now().getHour() &&
@@ -89,6 +101,12 @@ public class Roboter {
         }
     }
 
+    /**
+     * Fährt eine Einheit nach vorne, wenn alles Frei ist.
+     * Wenn der Roboter mit Kot kollidirt wird der Status auf KOTSTOP gestzt
+     * Wenn Bateriestand kleiner gleich 25% ist, wird der Status auf RUECKWEG gestzt
+     * @param manager RaumManager
+     */
     private void berechneFahren(RaumManager manager) {
         if (kollision(manager)) {
             if (kotstop){
@@ -112,6 +130,9 @@ public class Roboter {
         if (batteriestand <= 0.25) status = Status.RUECKWEG;
     }
 
+    /**
+     * dreht sich nach rechts, bis die Zielrotation erreicht ist, danach wird der Status auf FAHREN gesetzt
+     */
     private void dreheRechtsBisZiel() {
         if (rotation < zielRotation)
             dreheRechts(2);
@@ -119,6 +140,9 @@ public class Roboter {
             status = Status.FAHREN;
     }
 
+    /**
+     * dreht sich nach links, bis die Zielrotation erreicht ist, danach wird der Status auf FAHREN gesetzt
+     */
     private void dreheLinksBisZiel() {
         if (rotation > zielRotation)
             dreheLinks(2);
@@ -126,6 +150,9 @@ public class Roboter {
             status = Status.FAHREN;
     }
 
+    /**
+     * lädt die Batterie, bis diese voll ist und setzt dann den Status auf IDLE
+     */
     private void lade() {
         if (batteriestand < 1) {
             batteriestand += 0.0001 * geschwindigkeit;
@@ -135,6 +162,10 @@ public class Roboter {
         }
     }
 
+    /**
+     * Schaut sich nach der Ladestation um und fährt dann zu dieser hin
+     * @param manager RaumManager
+     */
     private void geheZurueck(RaumManager manager) {
         if (!stationGefunden) {
             if (rotation > 0) {
@@ -160,6 +191,9 @@ public class Roboter {
         }
     }
 
+    /**
+     * Setzt laser auf true und dreht sich um eins nach rechts
+     */
     private void scanneRaum() {
         laserAn = true;
         if (rotation < 360 && !stationGefunden) {
@@ -171,14 +205,26 @@ public class Roboter {
         }
     }
 
+    /**
+     * der Rotationswinkel wird erhöht
+     * @param v v
+     */
     private void dreheRechts(double v) {
         rotation += v * geschwindigkeit;
     }
 
+    /**
+     * der Rotationswinkel wird verkleinert
+     * @param v v
+     */
     private void dreheLinks(double v) {
         rotation -= v * geschwindigkeit;
     }
 
+    /**
+     * fährt nach vorne
+     * @param strecke strecke, welche zurückgelgt werden soll
+     */
     private void fahre(double strecke) {
         if (batteriestand > 0.01 && reparaturstatus > 0.01) {
             posX -= cos(Math.toRadians(rotation - 90)) * strecke * geschwindigkeit;
@@ -187,6 +233,11 @@ public class Roboter {
         }
     }
 
+    /**
+     * Überprüft die Kollision des Roboters
+     * @param manager RaumManager
+     * @return boolean Ob Kollision vorhanden ist
+     */
     boolean kollision(RaumManager manager) {
         for (Hinderniss hinderniss : manager.getHindernisse()) {
             if (hinderniss.getPosX() <= posX + 20 &&
@@ -203,6 +254,10 @@ public class Roboter {
         return false;
     }
 
+    /**
+     * Entfernt schmutz, wo der Roboter rüberfährt
+     * @param manager RaumManager
+     */
     void ueberpruefeSchmutz(RaumManager manager) {
         if (beutelinhalt < 1) {
             ArrayList<Schmutz> temp = new ArrayList<>(manager.getSchmutzTeilchen());
@@ -219,26 +274,50 @@ public class Roboter {
         }
     }
 
+    /**
+     * Gibt die X-Position des Roboters zurück
+     * @return posX
+     */
     public double getPosX() {
         return posX;
     }
 
+    /**
+     * Gibt die Y-Position des Roboters zurück
+     * @return posY
+     */
     public double getPosY() {
         return posY;
     }
 
+    /**
+     * Gibt die Rotation des Roboters zurück
+     * @return rotation
+     */
     public double getRotation() {
         return rotation;
     }
 
+    /**
+     * Gibt den Status des Roboters zurück
+     * @return status
+     */
     public Status getStatus() {
         return status;
     }
 
+    /**
+     * Gibt den Batteriestand des Roboters zurück
+     * @return batteriestand
+     */
     public double getBatteriestand() {
         return batteriestand;
     }
 
+    /**
+     * Gibt den Beutelinhalt des Roboters zurück
+     * @return beutelinhalt
+     */
     public double getBeutelinhalt() {
         return beutelinhalt;
     }
@@ -263,6 +342,10 @@ public class Roboter {
         beutelinhalt = 0;
     }
 
+    /**
+     * Gibt die Geschwindigkeit zurück
+     * @return geschwindigkeit
+     */
     public double getGeschwindigkeit() {
         return geschwindigkeit;
     }

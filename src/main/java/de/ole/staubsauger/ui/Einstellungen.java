@@ -19,6 +19,7 @@ public class Einstellungen {
         this.raum = raum;
     }
 
+
     public void initialize(){
         geschwindikeitAnzeige.setLabelFor(geschwindigkeit);
     }
