@@ -15,8 +15,8 @@ public class RaumManager {
     Ladestation ladestation;
 
 
-
-    int breite, hoehe;
+    int breite;
+    int hoehe;
 
     public void erstelleRaum(int breite, int hoehe, int anzahlSchmutz) {
         this.breite = breite;

@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
-    public int fps = 60;
+    public static final int FPS = 60;
     RaumManager manager = new RaumManager();
     RaumFX raumFX = new RaumFX();
     Roboter roboter = new Roboter(200, 40, 0);
