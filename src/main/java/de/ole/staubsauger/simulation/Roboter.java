@@ -1,8 +1,8 @@
 package de.ole.staubsauger.simulation;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 
 import static java.lang.Math.cos;
@@ -72,10 +72,10 @@ public class Roboter {
     }
 
     private void idle() {
-        datum = new Date();
-        if (putzTag.equals(dateFormat.format(datum)) &&
-                putzStunde == datum.getHours() &&
-                putzMinute == datum.getMinutes()) {
+
+        if (putzTag.equals(dateFormat.format(LocalDateTime.now().getDayOfWeek())) &&
+                putzStunde == LocalDateTime.now().getHour() &&
+                putzMinute == LocalDateTime.now().getMinute()) {
             status = Status.FAHREN;
         }
     }
@@ -238,7 +238,7 @@ public class Roboter {
     }
 
     public double getRestzeit() {
-        return batteriestand * zeitBeiVollemAkku;
+        return batteriestand * ZEIT_BEI_VOLLEM_AKKU;
     }
 
     public void setStatus(Status status) {
