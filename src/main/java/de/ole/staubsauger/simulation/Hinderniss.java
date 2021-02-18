@@ -1,6 +1,6 @@
 package de.ole.staubsauger.simulation;
 
-public class Hinderniss {
+public abstract class Hinderniss {
     protected double posX;
     protected double posY;
     protected double breite;

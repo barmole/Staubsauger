@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class RoboterTest {
+    Roboter roboter = new Roboter(100, 200, 0);
+    RaumManager manager = new RaumManager();
 
     @Test
     void berechne() {
