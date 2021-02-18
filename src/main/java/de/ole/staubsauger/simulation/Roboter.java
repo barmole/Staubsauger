@@ -47,7 +47,7 @@ public class Roboter {
     public void berechne(RaumManager manager) {
         switch (status) {
             case IDLE:
-                idle();
+                ueberpruefePutztag();
                 break;
 
             case FAHREN:
@@ -164,7 +164,8 @@ public class Roboter {
         laserAn = true;
         if (rotation < 360 && !stationGefunden) {
             dreheRechts(1 / geschwindigkeit);
-        } else {
+        }
+        else {
             laserAn = false;
             status = Status.RUECKWEG;
         }

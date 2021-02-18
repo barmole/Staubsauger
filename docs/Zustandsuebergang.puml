@@ -1,0 +1,42 @@
+@startuml
+
+[*] --> IDLE
+IDLE --> FAHREN : Startknopf
+IDLE --> FAHREN : Startzeit wird erreicht
+
+state KOLLISION <<choice>>
+KOLLISION --> DREHENLINKS : Zielrotation < rotation
+KOLLISION --> DREHENRECHTS : Zielrotation > rotation
+
+state KOT <<choice>>
+FAHREN --> KOT : Kollision
+KOT --> KOTSTOP : Hinderniss = Kot
+KOT --> KOLLISION : Hinderniss != Kot
+
+state ROTATION <<choice>>
+ROTATION --> DREHENLINKS : rotation > 0
+ROTATION --> RAUMSCAN : rotation <= 0
+
+RAUMSCAN --> RUECKWEG : Ladestation gefunden
+
+RUECKWEG --> ROTATION
+RUECKWEG --> LADEN : Ladestation erreicht
+LADEN --> IDLE : aufgeladen
+
+state AUFLADENKNOPF <<join>>
+IDLE --> AUFLADENKNOPF : Aufladenknopf
+FAHREN --> AUFLADENKNOPF : Aufladenknopf
+DREHENLINKS --> AUFLADENKNOPF : Aufladenknopf
+DREHENRECHTS --> AUFLADENKNOPF : Aufladenknopf
+AUFLADENKNOPF --> RUECKWEG
+
+state STOPPKNOPF <<join>>
+FAHREN --> STOPPKNOPF : Stoppknopf
+DREHENLINKS --> STOPPKNOPF : Stoppknopf
+DREHENRECHTS --> STOPPKNOPF : Stoppknopf
+RAUMSCAN --> STOPPKNOPF : Stoppknopf
+RUECKWEG --> STOPPKNOPF : Stoppknopf
+LADEN --> STOPPKNOPF : Stoppknopf
+KOTSTOP --> STOPPKNOPF : Stoppknopf
+STOPPKNOPF --> IDLE
+@enduml
