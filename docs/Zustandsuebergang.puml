@@ -1,5 +1,4 @@
 @startuml
-
 [*] --> IDLE
 IDLE --> FAHREN : Startknopf
 IDLE --> FAHREN : Startzeit wird erreicht

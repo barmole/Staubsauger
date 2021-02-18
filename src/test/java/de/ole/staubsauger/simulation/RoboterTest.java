@@ -1,36 +1,42 @@
 package de.ole.staubsauger.simulation;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class RoboterTest {
-    Roboter roboter = new Roboter(100, 200, 0);
-    RaumManager manager = new RaumManager();
+    Roboter roboter;
+    RaumManager manager;
+
+    @BeforeEach
+    void setUp() {
+        roboter = new Roboter(100, 200, 0);
+        manager = new RaumManager();
+        manager.erstelleRaum(400, 1000, 2000);
+    }
 
     @Test
-    void getPosX() {
+    void initial() {
         assertEquals(100, roboter.getPosX());
         assertNotEquals(200, roboter.getPosX());
 
-        manager.erstelleRaum(100, 100, 100);
+        assertEquals(200, roboter.getPosY());
+        assertNotEquals(100, roboter.getPosY());
+    }
+
+    @Test
+    void getPosX() {
         roboter.setStatus(Status.FAHREN);
         roboter.berechne(manager);
-
         assertEquals(100, roboter.getPosX());
     }
 
     @Test
     void getPosY() {
-        assertEquals(200, roboter.getPosY());
-        assertNotEquals(100, roboter.getPosY());
-
-        manager.erstelleRaum(100, 1000, 100);
         roboter.setStatus(Status.FAHREN);
         roboter.berechne(manager);
-
-        assertEquals(199, roboter.getPosY());
+        assertEquals(201, roboter.getPosY());
     }
 
     @Test
@@ -48,7 +54,6 @@ class RoboterTest {
     void getBatteriestand() {
         assertEquals(1, roboter.getBatteriestand());
 
-        manager.erstelleRaum(100, 1000, 100);
         roboter.setStatus(Status.FAHREN);
         roboter.berechne(manager);
 
@@ -60,12 +65,10 @@ class RoboterTest {
         assertEquals(0.0, roboter.getBeutelinhalt());
         assertNotEquals(10.0, roboter.getBeutelinhalt());
 
-        manager.erstelleRaum(500, 500, 2000);
         roboter.setStatus(Status.FAHREN);
         roboter.berechne(manager);
 
-        assert 0.0 < roboter.getBeutelinhalt();
-
+        assertTrue( 0.0 < roboter.getBeutelinhalt());
     }
 
     @Test

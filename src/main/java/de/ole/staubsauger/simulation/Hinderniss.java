@@ -7,6 +7,13 @@ public abstract class Hinderniss {
     protected double breite;
     protected double hoehe;
 
+    protected Hinderniss(double posX, double posY, double breite, double hoehe) {
+        this.posX = posX;
+        this.posY = posY;
+        this.breite = breite;
+        this.hoehe = hoehe;
+    }
+
     /**
      * Gibt die X-Position des Hindernisses zurück
      * @return posX

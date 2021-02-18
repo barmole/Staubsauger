@@ -109,7 +109,7 @@ public class Main extends Application {
             steuerung.setScene(new Scene(rootLayout));
             steuerung.setTitle("Steuerung");
             steuerung.setX(0);
-            steuerung.setY((double) manager.getHoehe() + 30);
+            steuerung.setY(manager.getHoehe() + 30d);
             steuerung.show();
         } catch (Exception e) {
             e.printStackTrace();
