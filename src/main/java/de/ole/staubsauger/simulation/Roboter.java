@@ -1,7 +1,7 @@
 package de.ole.staubsauger.simulation;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -26,7 +26,7 @@ public class Roboter {
     private double geschwindigkeit = 1;
     private static final double ZEIT_BEI_VOLLEM_AKKU = 300;
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE");
+    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE");
 
     Random r = new Random();
     Status status;
@@ -81,7 +81,7 @@ public class Roboter {
 
     private void idle() {
 
-        if (putzTag.equals(dateFormat.format(LocalDateTime.now().getDayOfWeek())) &&
+        if (putzTag.equals(LocalDateTime.now().format(dateFormat)) &&
                 putzStunde == LocalDateTime.now().getHour() &&
                 putzMinute == LocalDateTime.now().getMinute()) {
             status = Status.FAHREN;
