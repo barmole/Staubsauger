@@ -1,11 +1,10 @@
-package de.ole.Staubsauger.UI;
+package de.ole.staubsauger.ui;
 
-import de.ole.Staubsauger.Simulation.RaumManager;
-import de.ole.Staubsauger.Simulation.Roboter;
+import de.ole.staubsauger.simulation.RaumManager;
+import de.ole.staubsauger.simulation.Roboter;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
 public class Einstellungen {
 
@@ -24,7 +23,7 @@ public class Einstellungen {
         geschwindikeitAnzeige.setLabelFor(geschwindigkeit);
     }
 
-    public void sliderDragDone(MouseEvent dragEvent) {
+    public void sliderDragDone() {
         geschwindikeitAnzeige.setText(""+geschwindigkeit.getValue());
         roboter.setGeschwindigkeit(geschwindigkeit.getValue());
     }
@@ -34,7 +33,6 @@ public class Einstellungen {
     }
 
     public void streuenSchmutz(){
-        System.out.println(anzahlSchmutz.getText());
         raum.streueSchmutz(Integer.parseInt(anzahlSchmutz.getText()));
     }
 

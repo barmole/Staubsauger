@@ -1,7 +1,7 @@
-package de.ole.Staubsauger.UI;
+package de.ole.staubsauger.ui;
 
-import de.ole.Staubsauger.Simulation.Roboter;
-import de.ole.Staubsauger.Simulation.Status;
+import de.ole.staubsauger.simulation.Roboter;
+import de.ole.staubsauger.simulation.Status;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;

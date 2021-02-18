@@ -1,9 +1,10 @@
-package de.ole.Staubsauger.Simulation;
+package de.ole.staubsauger.simulation;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class RaumManager {
@@ -22,8 +23,8 @@ public class RaumManager {
         this.hoehe = hoehe;
         Hinderniss wand1 = new Wand(0, 0, 10, hoehe);
         Hinderniss wand2 = new Wand(0, 0, breite, 10);
-        Hinderniss wand3 = new Wand(0, hoehe - 10, breite, 10);
-        Hinderniss wand4 = new Wand(breite - 10, 0, 10, hoehe);
+        Hinderniss wand3 = new Wand(0, hoehe - 10.0, breite, 10);
+        Hinderniss wand4 = new Wand(breite - 10.0, 0, 10, hoehe);
 
         hindernisse.add(wand1);
         hindernisse.add(wand2);
@@ -32,17 +33,17 @@ public class RaumManager {
 
         streueSchmutz(anzahlSchmutz);
 
-        ladestation = new Ladestation(breite / 2, 20);
+        ladestation = new Ladestation(breite / 2.0, 20);
 
         Circle roboter = new Circle(200, 200, 20);
         roboter.setFill(Color.BLUE);
     }
 
-    public ArrayList<Hinderniss> getHindernisse() {
+    public List<Hinderniss> getHindernisse() {
         return hindernisse;
     }
 
-    public ArrayList<Schmutz> getSchmutzTeilchen() {
+    public List<Schmutz> getSchmutzTeilchen() {
         return schmutzTeilchen;
     }
 
@@ -73,6 +74,6 @@ public class RaumManager {
     public void legeKot() {
         double randomX = r.nextInt(breite);
         double randomY = r.nextInt(hoehe);
-        hindernisse.add(new Kot(randomX,randomY));
+        hindernisse.add(new Kot(randomX, randomY));
     }
 }

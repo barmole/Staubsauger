@@ -1,16 +1,12 @@
-package de.ole.Staubsauger.Simulation;
+package de.ole.staubsauger.simulation;
 
-public class Kot extends Hinderniss{
-    private final double posX;
-    private final double posY;
-    private final double breite;
-    private final double hoehe;
+public class Wand extends Hinderniss {
 
-    public Kot(double posX, double posY) {
+    public Wand(double posX, double posY, double breite, double hoehe) {
         this.posX = posX;
         this.posY = posY;
-        this.breite = 5;
-        this.hoehe = 5;
+        this.breite = breite;
+        this.hoehe = hoehe;
     }
 
 

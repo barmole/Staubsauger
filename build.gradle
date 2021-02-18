@@ -37,11 +37,11 @@ launch4j {
 
 jar {
 	manifest {
-		attributes 'Main-Class': 'de.ole.Staubsauger.UI.Main'
+		attributes 'Main-Class': 'de.ole.staubsauger.ui.Main'
 	}
 }
 
-mainClassName = 'de.ole.Staubsauger.UI.Main'
+mainClassName = 'de.ole.staubsauger.ui.Main'
 
 bootRun {
 	doFirst {

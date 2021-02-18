@@ -1,6 +1,6 @@
-package de.ole.Staubsauger.UI;
+package de.ole.staubsauger.ui;
 
-import de.ole.Staubsauger.Simulation.*;
+import de.ole.staubsauger.simulation.*;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;

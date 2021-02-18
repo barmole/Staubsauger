@@ -1,8 +1,8 @@
-package de.ole.Staubsauger.UI;
+package de.ole.staubsauger.ui;
 
-import de.ole.Staubsauger.Simulation.RaumManager;
-import de.ole.Staubsauger.Simulation.Roboter;
-import de.ole.Staubsauger.Simulation.Status;
+import de.ole.staubsauger.simulation.RaumManager;
+import de.ole.staubsauger.simulation.Roboter;
+import de.ole.staubsauger.simulation.Status;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +31,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        Main main = new Main();
     }
 
     private void berechne() {
@@ -64,7 +63,7 @@ public class Main extends Application {
         Pane pane = new Pane(raumGruppe, roboterGruppe);
         p.getChildren().add(pane);
 
-        long delay = (1000 / fps) - (System.currentTimeMillis() - time);
+        long delay = (1000 / FPS) - (System.currentTimeMillis() - time);
         if (delay > 0) {
             try {
                 Thread.sleep(delay);
@@ -110,7 +109,7 @@ public class Main extends Application {
             steuerung.setScene(new Scene(rootLayout));
             steuerung.setTitle("Steuerung");
             steuerung.setX(0);
-            steuerung.setY(manager.getHoehe() + 30);
+            steuerung.setY((double) manager.getHoehe() + 30);
             steuerung.show();
         } catch (Exception e) {
             e.printStackTrace();

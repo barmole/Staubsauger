@@ -1,4 +1,4 @@
-package de.ole.Staubsauger.Simulation;
+package de.ole.staubsauger.simulation;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
