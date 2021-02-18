@@ -37,6 +37,7 @@ public class Roboter {
         this.posY = posY;
         this.rotation = rotation;
 
+        status = Status.IDLE;
         batteriestand = 1;
         beutelinhalt = 0;
         reparaturstatus = 1;
@@ -259,5 +260,9 @@ public class Roboter {
 
     public void leereStaubfach() {
         beutelinhalt = 0;
+    }
+
+    public double getGeschwindigkeit() {
+        return geschwindigkeit;
     }
 }

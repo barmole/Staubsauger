@@ -98,11 +98,20 @@ class RoboterTest {
 
     @Test
     void setGeschwindigkeit() {
-
+        roboter.setGeschwindigkeit(100);
+        assertEquals(100, roboter.getGeschwindigkeit());
     }
 
     @Test
     void leereStaubfach() {
+        manager.erstelleRaum(500, 500, 2000);
+        roboter.setStatus(Status.FAHREN);
+        roboter.berechne(manager);
 
+        assert 0.0 < roboter.getBeutelinhalt();
+
+        roboter.leereStaubfach();
+
+        assertEquals(0, roboter.getBeutelinhalt());
     }
 }
