@@ -1,6 +1,7 @@
 package de.ole.staubsauger.simulation;
 
 public class Schmutz {
+
     double posX;
     double posY;
 
@@ -16,4 +17,5 @@ public class Schmutz {
     public double getPosY() {
         return posY;
     }
+
 }

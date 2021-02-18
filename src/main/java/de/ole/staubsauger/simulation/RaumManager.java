@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 public class RaumManager {
+
     Random r = new Random();
 
     ArrayList<Hinderniss> hindernisse = new ArrayList<>();
@@ -112,4 +113,5 @@ public class RaumManager {
         double randomY = r.nextInt(hoehe);
         hindernisse.add(new Kot(randomX, randomY));
     }
+
 }

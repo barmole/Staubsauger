@@ -1,6 +1,9 @@
 package de.ole.staubsauger.simulation;
 
 public enum Status {
+    /**
+     * Der Roboter hat nichts zu tun
+     */
     IDLE,
     FAHREN,
     DREHENRECHTS,
@@ -9,4 +12,5 @@ public enum Status {
     RUECKWEG,
     LADEN,
     KOTSTOP;
+
 }

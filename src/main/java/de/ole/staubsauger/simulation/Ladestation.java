@@ -1,6 +1,7 @@
 package de.ole.staubsauger.simulation;
 
 public class Ladestation {
+
     double posX;
     double posY;
 

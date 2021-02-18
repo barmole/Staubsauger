@@ -1,6 +1,7 @@
 package de.ole.staubsauger.simulation;
 
 public abstract class Hinderniss {
+
     protected double posX;
     protected double posY;
     protected double breite;
@@ -37,4 +38,5 @@ public abstract class Hinderniss {
     public double getHoehe() {
         return hoehe;
     }
+
 }
